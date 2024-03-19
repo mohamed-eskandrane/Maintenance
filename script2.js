@@ -285,7 +285,7 @@ function LoadGeneralD(){
 }
 
 function SelectOneOrTwo(MyValue){
-if(MyValue==1){
+if(MyValue=="1"){
   LoadTechnique_Problem();
 }else{
   LoadGeneral();

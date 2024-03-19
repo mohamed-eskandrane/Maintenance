@@ -7,6 +7,10 @@ let UrlClass = base + "&sheet=Class&tq=" + encodeURIComponent('Select *');
 let DataClass = [];
 let UrlProblem = base + "&sheet=Problem&tq=" + encodeURIComponent('Select *');
 let DataProblem = [];
+let UrlTechnique_Problem = base + "&sheet=Technique_Problem&tq=" + encodeURIComponent('Select *');
+let DataTechnique_Problem = [];
+let UrlGeneral = base + "&sheet=General&tq=" + encodeURIComponent('Select *');
+let DataGeneral = [];
 
 document.addEventListener('DOMContentLoaded', init)
 function init() {
@@ -198,6 +202,95 @@ function LoadProblemName(){
   }
 }
 
+function LoadTechnique_Problem(){
+  DataTechnique_Problem=[];
+  fetch(UrlTechnique_Problem)
+  .then(res => res.text())
+  .then(rep => {
+      const jsonTechnique_Problem = JSON.parse(rep.substring(47).slice(0, -2));
+      const colzTechnique_Problem = [];
+      jsonTechnique_Problem.table.cols.forEach((headingTechnique_Problem) => {
+          if (headingTechnique_Problem.label) {
+              let columnTechnique_Problem = headingTechnique_Problem.label;
+              colzTechnique_Problem.push(columnTechnique_Problem);
+          }
+      })
+      jsonTechnique_Problem.table.rows.forEach((rowData4) => {
+          const rowTechnique_Problem = {};
+          colzTechnique_Problem.forEach((ele, ind) => {
+              rowTechnique_Problem[ele] = (rowData4.c[ind] != null) ? rowData4.c[ind].v : '';
+          })
+          DataTechnique_Problem.push(rowTechnique_Problem);
+      })
+      if (isNaN(DataTechnique_Problem[0].Auto_Code)==false){LoadTechnique();}
+  })
+}
+
+function LoadTechnique(){
+  let Technique_Problem,Auto_Code;
+  let optionClass;
+  let problemList =document.getElementById("Technique_ProblemList");
+  problemList.innerHTML="<option value=''>اختر المشكلة من القائمة</option>";
+  for (let index = 0; index < DataTechnique_Problem.length; index++) {
+    Auto_Code=DataTechnique_Problem[index].Auto_Code;
+    Technique_Problem=DataTechnique_Problem[index].Technique_Problem;
+    if(Auto_Code!=""){
+      optionClass=document.createElement("option");
+      optionClass.value=Auto_Code;
+      optionClass.textContent=Technique_Problem;
+      problemList.appendChild(optionClass);
+    }
+  }
+}
+
+function LoadGeneral(){
+  DataGeneral=[];
+  fetch(UrlGeneral)
+  .then(res => res.text())
+  .then(rep => {
+      const jsonGeneral = JSON.parse(rep.substring(47).slice(0, -2));
+      const colzGeneral = [];
+      jsonGeneral.table.cols.forEach((headingGeneral) => {
+          if (headingGeneral.label) {
+              let columnGeneral = headingGeneral.label;
+              colzGeneral.push(columnGeneral);
+          }
+      })
+      jsonGeneral.table.rows.forEach((rowData5) => {
+          const rowGeneral = {};
+          colzGeneral.forEach((ele, ind) => {
+              rowGeneral[ele] = (rowData5.c[ind] != null) ? rowData5.c[ind].v : '';
+          })
+          DataGeneral.push(rowGeneral);
+      })
+      if (isNaN(DataGeneral[0].Auto_Code)==false){LoadGeneralD();}
+  })
+}
+
+function LoadGeneralD(){
+  let General,Auto_Code;
+  let optionClass;
+  let problemList =document.getElementById("Technique_ProblemList");
+  problemList.innerHTML="<option value=''>اختر المشكلة من القائمة</option>";
+  for (let index = 0; index < DataGeneral.length; index++) {
+    Auto_Code=DataGeneral[index].Auto_Code;
+    General=DataGeneral[index].General;
+    if(Auto_Code!=""){
+      optionClass=document.createElement("option");
+      optionClass.value=Auto_Code;
+      optionClass.textContent=General;
+      problemList.appendChild(optionClass);
+    }
+  }
+}
+
+function SelectOneOrTwo(MyValue){
+if(MyValue==1){
+  LoadTechnique_Problem();
+}else{
+  LoadGeneral();
+}
+}
 // ***********************Mode*********************
 function ConvertMode(){
   if (localStorage.getItem("FColor")==1){

@@ -282,6 +282,7 @@ function LoadGeneralD(){
 }
 
 function SelectOneOrTwo(MyValue){
+document.getElementById("Technique_Problem").value="";
 if(MyValue=="1"){
   LoadTechnique_Problem();
 }else{

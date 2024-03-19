@@ -72,6 +72,7 @@ function LoadSectionName(){
     Section_Name=DataSection[index].Section_Name;
     if(Auto_Code!=""){
       optionClass=document.createElement("option");
+      optionClass.value=Section_Name;
       optionClass.textContent=Section_Name;
       SectionList.appendChild(optionClass);
     }

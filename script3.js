@@ -72,7 +72,6 @@ function LoadSectionName(){
     Section_Name=DataSection[index].Section_Name;
     if(Auto_Code!=""){
       optionClass=document.createElement("option");
-      optionClass.value=Section_Name;
       optionClass.textContent=Section_Name;
       SectionList.appendChild(optionClass);
     }
@@ -154,7 +153,6 @@ function LoadClassName(){
     Class_number=DataClass[index].Class_number;
     if(Auto_Code!=""){
       optionClass=document.createElement("option");
-      optionClass.value=Class_number;
       optionClass.textContent=Class_number;
       Class_NumberList.appendChild(optionClass);
     }
@@ -236,7 +234,6 @@ function LoadTechnique(){
     Technique_Problem=DataTechnique_Problem[index].Technique_Problem;
     if(Auto_Code!=""){
       optionClass=document.createElement("option");
-      optionClass.value=Auto_Code;
       optionClass.textContent=Technique_Problem;
       problemList.appendChild(optionClass);
     }
@@ -277,7 +274,6 @@ function LoadGeneralD(){
     General=DataGeneral[index].General;
     if(Auto_Code!=""){
       optionClass=document.createElement("option");
-      optionClass.value=Auto_Code;
       optionClass.textContent=General;
       problemList.appendChild(optionClass);
     }
